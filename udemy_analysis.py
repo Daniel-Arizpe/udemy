@@ -68,15 +68,26 @@ df.columns
 
 
 #Registros por pago
-pd.value_counts(df['gratuito o paga'])
-plt.pie(pd.value_counts(df['subject']))
+pd.value_counts(df['subject'])
+plt.pie(pd.value_counts(df['gratuito o paga']), labels=['Paga','Gratuito'])
+plt.title("Cursos gratuito o de paga")
+plt.axis('equal')
+
+plt.pie(pd.value_counts(df['subject']), labels=['Web Development','Business Finance','Musical Instruments','Graphic Design'])
+plt.title("Conteo de cursos por subjejct")
+plt.axis('equal')
+
 df['rese'] = df['suscriptores'] / df['resenias']
 
 
 #Boxplot
-sns.boxplot(x=df['subject'], y=df['rese'])
-plt.axis([ 0, 200])
+sns.boxplot(x=df['subject'], y=df['conferencias'])
+plt.title("Boxplot de Conferencias")
+
 #grafico
-Tabla1=df.duracion.groupby(df.dificultad).count().plot(kind='pie', cmap='Paired')
-plt.axis('equal')
+Tabla1=df.duracion.groupby(df.dificultad).mean().plot(kind='pie', cmap='Paired')
+plt.title('Promedio de la duracion de los cursos por dificultad')
+plt.ylabel('')
 tabla2 = df.suscriptores.groupby(df.subject).sum().plot(kind='barh')
+
+
